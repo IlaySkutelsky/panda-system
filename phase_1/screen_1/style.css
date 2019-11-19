@@ -24,7 +24,6 @@ h1 strong {
 }
 
 .container {
-  position: relative;
   /* max-width: 1020px; */
   padding: 40px 0;
   margin: 0 auto;
@@ -35,7 +34,10 @@ h1 strong {
 
 .time {
   position: absolute;
-  right: 20px;
+  font-size: 1.6em;
+  right: 0px;
+  top: 0px;
+  padding: 1em 3em;
 }
 
 .instructions-container {
@@ -78,6 +80,9 @@ h1 strong {
   }
   .instructions-container {
     margin-top: 5em;
+  }
+  .time {
+    padding: 1em 2em;
   }
 }
 
