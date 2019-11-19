@@ -23,10 +23,10 @@ h1 strong {
   display: none !important;
 }
 
-.container {
+body {
   /* max-width: 1020px; */
-  padding: 40px 0;
-  margin: 0 auto;
+  /* padding: 40px 0; */
+  /* margin: 0 auto; */
   text-align: center;
   direction: rtl;
   font-family: 'Alef', sans-serif;

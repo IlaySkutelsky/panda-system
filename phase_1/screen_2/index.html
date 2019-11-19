@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="../../lib/sakura/sakura.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="../../lib/jquery/jquery-3.4.1.js"></script>
+  <!-- <script src="../../lib/jquery/jquery-3.4.1.min.js"></script> -->
+  <script src="main.js" defer></script>
+  <title>Panda System - Screen 2</title>
+</head>
+<body onload="init()">
+    <span class="clock">10:11</span>
+    <section class="is-working">
+      <h1>הקו כרגע עובד</h1>
+      <h3 class="shift-start">
+        תחילת עבודה:
+        <span class="time">
+          7:03
+        </span>
+        <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
+      </h3>
+
+      <h2 class="buttons-title"></h2>
+      <div class="buttons-container">
+        <button type="button" name="button">lalala</button>
+      </div>
+    </section>
+    <section class="is-stopped">
+      <h1>הקו כרגע מושבת</h1>
+      <h2 class="stop-reason">
+        סיבת ההשבתה:
+        <span class="reason">
+          הפסקה
+        </span>
+      </h2>
+      <h2 class="stop-dur">
+        הקו מושבת כבר:
+        <span class="dur">
+          00:26
+        </span>
+      </h2>
+
+      <button type="button" name="button">חזרה לעבודה</button>
+    </section>
+</body>
+</html>
