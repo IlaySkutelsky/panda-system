@@ -1,14 +1,14 @@
 
 function init(){
-  getAndUpdateDate();
+  getAndUpdateData();
 }
 
-function getAndUpdateDate() {
+function getAndUpdateData() {
   getAndShowTime();
   getAndShowProdRate();
   getAndShowShiftSum();
   getAndShowInstructions();
-  setTimeout(getAndUpdateDate, 10000)
+  setTimeout(getAndUpdateData, 10000)
 }
 
 function getAndShowProdRate() {
