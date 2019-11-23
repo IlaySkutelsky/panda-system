@@ -15,9 +15,9 @@
     <span class="clock">10:11</span>
     <section class="is-working">
       <h1>הקו כרגע עובד</h1>
-      <h3 class="shift-start">
+      <h3 class="work-dur">
         תחילת עבודה:
-        <span class="time">
+        <span class="dur">
           7:03
         </span>
         <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
@@ -28,7 +28,7 @@
         <button type="button" name="button">lalala</button>
       </div>
     </section>
-    <section class="is-stopped">
+    <section class="is-stopped hidden">
       <h1>הקו כרגע מושבת</h1>
       <h2 class="stop-reason">
         סיבת ההשבתה:
@@ -43,7 +43,12 @@
         </span>
       </h2>
 
-      <button type="button" name="button">חזרה לעבודה</button>
+      <button type="button" class="stop-button" onclick="goBackToWork()">
+        <span>
+          חזרה לעבודה
+        </span>
+        <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
+      </button>
     </section>
 </body>
 </html>

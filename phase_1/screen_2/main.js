@@ -1,73 +1,65 @@
+let state = {
+  isWorking: false,
+  workingSinceTimestamp: null,
+  stoppedSinceTimestamp: Date.now(),
+  stopReasonsJSON: null
+}
 
 function init(){
   getAndUpdateData();
+  getAndShowReasons();
+  // get reasons and render
 }
 
 function getAndUpdateData() {
   getAndShowTime();
-  getAndShowProdRate();
-  getAndShowShiftSum();
-  getAndShowInstructions();
-  setTimeout(getAndUpdateData, 10000)
+  // updateDuration();
+  setTimeout(getAndUpdateData, 10000);
 }
 
-function getAndShowProdRate() {
+function getAndShowReasons() {
+  // $(".prod-rate .lds-ellipsis").addClass("hidden")
   $.ajax({
-     url: "http://www.chocolatepanda.co.il/kav/current_rate.php",
+     url: "http://www.chocolatepanda.co.il/kav/stop_reasons.php",
    })
   .done((result) => {
-    console.log(" >>> getAndShowProdRate succes! result: " + result);
-    let amount = result.data;
-    $(".prod-rate .lds-ellipsis").addClass("hidden")
-    $(".prod-rate .amount").text(amount)
+    console.log(" >>> getAndShowReasons succes! result: " + result);
   })
   .fail((error) => {
-    console.log(" >>> getAndShowProdRate error!: " + JSON.stringify(error));
+    console.log(" >>> getAndShowReasons error!: " + JSON.stringify(error));
   })
-  // $(".prod-rate .lds-ellipsis").removeClass("hidden")
 
-  let amount = 350;
-  $(".prod-rate .amount").text(amount)
+  let json = `[{"title":"break","id":0},{"title":"technical","id":1},{"title":"rnd of shift","id":2},{"title":"break","id":3},{"title":"technical","id":4},{"title":"rnd of shift","id":4},{"title":"break","id":6},{"title":"technical","id":7},{"title":"rnd of shift","id":8},{"title":"break","id":9},{"title":"technical","id":10},{"title":"rnd of shift","id":11}]`
+  if (state.stopReasonsJSON && state.stopReasonsJSON != json) {
+    state.stopReasonsJSON = json
+    let reasons = JSON.parse(json)
+    // jquery render reasons
+  }
+
 }
 
-function getAndShowShiftSum() {
+
+function goBackToWork() {
+  $(".stop-button span").text(" ")
+  $(".stop-button .lds-ellipsis").removeClass("hidden");
   $.ajax({
-     url: "http://www.chocolatepanda.co.il/kav/shift_output.php",
+     url: "http://www.chocolatepanda.co.il/kav/start_line.php",
+     method: "POST"
    })
   .done((result) => {
-    console.log(" >>> getAndShowShiftSum succes! result: " + result);
-    let amount = result.data;
-    $(".shift-sum .lds-ellipsis").addClass("hidden")
-    $(".prod-rate .amount").text(amount)
+    console.log(" >>> goBackToWork succes! result: " + result);
+    $(".stop-button .lds-ellipsis").addClass("hidden")
   })
   .fail((error) => {
-    console.log(" >>> getAndShowShiftSum error!: " + JSON.stringify(error));
+    console.log(" >>> goBackToWork error!: " + JSON.stringify(error));
   })
-  // $(".shift-sum .lds-ellipsis").removeClass("hidden")
 
-  let amount = 350;
-  $(".shift-sum .amount").text(amount)
-}
-
-function getAndShowInstructions() {
-  $.ajax({
-     url: "http://www.chocolatepanda.co.il/kav/shift_output.php",
-   })
-  .done((result) => {
-    console.log(" >>> getAndShowInstructions succes! result: " + result);
-    let instructions = result.data;
-    $(".instructions-container .lds-ellipsis").addClass("hidden")
-    $(".instructions").text(instructions)
-  })
-  .fail((error) => {
-    console.log(" >>> getAndShowInstructions error!: " + JSON.stringify(error));
-  })
-  // $(".instructions-container .lds-ellipsis").removeClass("hidden")
-
-  let instructions = `
-    לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר. מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, לפרומי בלוף קינץ תתיח לרעח. `;
-  $(".instructions").text(instructions)
-  $(".instructions").shrinkText();
+  state.isWorking = true;
+  state.workingSinceTimestamp = Date.now();
+  state.stoppedSinceTimestamp = null;
+  $("section.is-stopped").addClass("hidden");
+  $("section.is-working").removeClass("hidden");
+  getAndShowReasons();
 }
 
 function getAndShowTime() {
@@ -84,21 +76,3 @@ function getAndShowTime() {
 function keepTwoDigits(n) {
     return n > 9 ? "" + n: "0" + n;
 }
-
-(function($){
-  $.fn.shrinkText = function() {
-
-    var $_me = this;
-    var $_parent = $_me.parent();
-
-    var int_my_height = $_me.height();
-    var int_parent_height = $_parent.height();
-
-    if ( int_my_height > int_parent_height ){
-      rl_ratio = int_parent_height / int_my_height;
-      var int_my_fontSize = $_me.css("font-size").replace(/[^-\d\.]/g, '');
-      int_my_fontSize = Math.floor(int_my_fontSize * rl_ratio);
-      $_me.css("font-size", int_my_fontSize + "px");
-    }
-  };
-})(jQuery);

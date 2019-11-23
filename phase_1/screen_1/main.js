@@ -12,62 +12,60 @@ function getAndUpdateData() {
 }
 
 function getAndShowProdRate() {
+  $(".prod-rate .amount").text(" ")
+  $(".prod-rate .lds-ellipsis").removeClass("hidden")
   $.ajax({
      url: "http://www.chocolatepanda.co.il/kav/current_rate.php",
    })
   .done((result) => {
     console.log(" >>> getAndShowProdRate succes! result: " + result);
-    let amount = result.data;
+    let amount = result;
     $(".prod-rate .lds-ellipsis").addClass("hidden")
     $(".prod-rate .amount").text(amount)
   })
   .fail((error) => {
     console.log(" >>> getAndShowProdRate error!: " + JSON.stringify(error));
   })
-  // $(".prod-rate .lds-ellipsis").removeClass("hidden")
-
-  let amount = 350;
-  $(".prod-rate .amount").text(amount)
 }
 
 function getAndShowShiftSum() {
+  $(".shift-sum .amount").text(" ")
+  $(".shift-sum .lds-ellipsis").removeClass("hidden")
   $.ajax({
      url: "http://www.chocolatepanda.co.il/kav/shift_output.php",
    })
   .done((result) => {
     console.log(" >>> getAndShowShiftSum succes! result: " + result);
-    let amount = result.data;
+    let amount = result;
     $(".shift-sum .lds-ellipsis").addClass("hidden")
-    $(".prod-rate .amount").text(amount)
+    $(".shift-sum .amount").text(amount)
   })
   .fail((error) => {
     console.log(" >>> getAndShowShiftSum error!: " + JSON.stringify(error));
   })
-  // $(".shift-sum .lds-ellipsis").removeClass("hidden")
-
-  let amount = 350;
-  $(".shift-sum .amount").text(amount)
 }
 
 function getAndShowInstructions() {
+  $(".instructions").text(" ")
+  $(".instructions-container .lds-ellipsis").removeClass("hidden")
   $.ajax({
      url: "http://www.chocolatepanda.co.il/kav/shift_output.php",
    })
   .done((result) => {
     console.log(" >>> getAndShowInstructions succes! result: " + result);
-    let instructions = result.data;
+    let instructions = result;
     $(".instructions-container .lds-ellipsis").addClass("hidden")
     $(".instructions").text(instructions)
+    $(".instructions").shrinkText();
   })
   .fail((error) => {
     console.log(" >>> getAndShowInstructions error!: " + JSON.stringify(error));
   })
-  // $(".instructions-container .lds-ellipsis").removeClass("hidden")
 
-  let instructions = `
-    לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר. מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, לפרומי בלוף קינץ תתיח לרעח. `;
-  $(".instructions").text(instructions)
-  $(".instructions").shrinkText();
+  // let instructions = `
+  //   לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר. מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, לפרומי בלוף קינץ תתיח לרעח. `;
+  // $(".instructions").text(instructions)
+  // $(".instructions").shrinkText();
 }
 
 function getAndShowTime() {
