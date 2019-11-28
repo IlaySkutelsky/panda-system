@@ -42,6 +42,11 @@ input.loss-amount {
   margin: 0.1em 1.3em;
 }
 
+input.loss-amount[type=number]::-webkit-inner-spin-button,
+input.loss-amount[type=number]::-webkit-outer-spin-button {
+  transform: scale(1.5);
+}
+
 .hidden {
   display: none !important;
 }
