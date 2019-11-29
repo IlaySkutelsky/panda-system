@@ -28,18 +28,27 @@ function submitLoss() {
    })
   .done((result) => {
     console.log(" >>> submitLoss success!");
+    $("h2.status.success").removeClass("hidden")
+    $("h2.status.success").addClass("fade-out")
+    setTimeout(hideStatus, 6000, "success")
   })
   .fail((error) => {
     console.log(" >>> submitLoss error!: " + JSON.stringify(error));
+    $("h2.status.error").removeClass("hidden")
   })
 
   bringButtonsBack()
 }
 
 function bringButtonsBack() {
-  $("input.loss-amount").val(0.1)
+  $("input.loss-amount").val(250)
   $(".amount-container").addClass("hidden")
   $(".buttons-container").removeClass("hidden")
+}
+
+function hideStatus(type) {
+  $(`h2.status.${type}`).addClass("hidden")
+  $(`h2.status.${type}`).removeClass("fade-out")
 }
 
 // function addDecimalPlaces(event) {  // Depracated for causing the input to "blink"

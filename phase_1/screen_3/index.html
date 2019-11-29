@@ -18,10 +18,13 @@
       <div class="buttons-container">
         <button class="main-buttons" type="button" onclick="setLossType(1)">מוצרים למיחזור</button>
         <button class="main-buttons" type="button" onclick="setLossType(2)">מוצרים לזריקה</button>
+        <h2 class="status success hidden">נשמר בהצלחה</h2>
+        <h2 class="status error hidden">ארעה שגיאה במהלך השמירה</h2>
       </div>
       <div class="amount-container hidden">
         <h2>כמות שוקולד למיחזור</h2>
-        <input class="loss-amount" type="number" value="0.1" min="0.1" step="0.1">
+        <input name="loss-amount" class="loss-amount" type="number" value="250" min="250" step="250">
+        <span>גרם</span>
         <button class="secondary-buttons" type="button" onclick="submitLoss()">שמירה</button>
         <button class="secondary-buttons" type="button" onclick="bringButtonsBack()">ביטול</button>
       </div>

@@ -7,47 +7,6 @@
   box-sizing: border-box;
 }
 
-h1 {
-  margin-top: 1.3em;
-  font-size: 5em;
-}
-
-h2 {
-  font-size: 2.5em;
-}
-
-button {
-  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.2);
-  margin: 0.5em;
-  padding: 0.5em;
-  border-radius: 20px;
-  transition: background-color 0.2s;
-}
-
-button.main-buttons {
-  font-size: 3em;
-  line-height: 3em;
-  }
-
-button.secondary-buttons {
-  font-size: 1.5em;
-  position: relative;
-  bottom: 0.5em;
-}
-
-input.loss-amount {
-  font-size: 3em;
-  width: 3.5em;
-  padding: 0.3em 0.5em;
-  margin: 0.1em 1.3em;
-}
-
-input.loss-amount[type=number]::-webkit-inner-spin-button,
-input.loss-amount[type=number]::-webkit-outer-spin-button {
-  transform: scale(1.5);
-  padding: 0 5px;
-}
-
 .hidden {
   display: none !important;
 }
@@ -66,6 +25,80 @@ body {
   padding: 1em 3em;
 }
 
+h1 {
+  margin: 1.3em 0 0 0;
+  font-size: 5em;
+}
+
+h2 {
+  font-size: 2.5em;
+}
+
+h2.status {
+  font-weight: 500;
+  margin: 0 auto;
+}
+
+h2.status.success {
+  color: lime;
+}
+
+
+h2.status.error {
+  color: red;
+}
+
+button {
+  box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.2);
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.buttons-container {
+  margin-top: 1em;
+}
+
+.amount-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.amount-container span {
+  font-size: 2.3em;
+}
+
+button.main-buttons {
+  font-size: 3em;
+  line-height: 3em;
+  }
+
+button.secondary-buttons {
+  font-size: 1.5em;
+  position: relative;
+  bottom: 0.5em;
+  margin: 1em 1.2em;
+  padding: 1em;
+  width: 5em;
+}
+
+input.loss-amount {
+  font-size: 3em;
+  width: 4.2em;
+  padding: 0.3em 0.5em;
+  margin: 0.5em;
+}
+
+input.loss-amount[type=number]::-webkit-inner-spin-button,
+input.loss-amount[type=number]::-webkit-outer-spin-button {
+  transform: scale(1.5);
+  padding: 0 5px;
+}
 
 /*  ------- Media Queries ------- */
 
@@ -77,21 +110,65 @@ body {
 
 @media (max-width: 810px) {
   body {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+  }
+  button.secondary-buttons {
+    margin: 1em 0.7em;
   }
 }
 
 @media (max-width: 640px) {
+  .amount-container {
+    width: 62%
+  }
   .clock {
     padding: 1em 2em;
   }
+  button.secondary-buttons {
+    margin: 1em 0.5em;
+  }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 520px) {
+  .amount-container {
+    width: 75%
+  }
   input.loss-amount {
-    margin: 0.1em;
+    margin: 0.3em;
   }
   button {
     margin: 0.2em;
+  }
+}
+
+@media (max-width: 450px) {
+  .amount-container {
+    width: 85%
+  }
+  button.secondary-buttons {
+    padding: 0.5em;
+  }
+}
+
+/*  ------- Animation -------  */
+
+.fade-out {
+  animation-duration: 4s;
+  animation-name: fadeOut;
+  animation-timing-function: cubic-bezier(1,0,1,1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1.2);
+    transform: translateY(0px);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.6);
+    transform: translateY(5px);
   }
 }
