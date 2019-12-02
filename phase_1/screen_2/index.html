@@ -13,42 +13,34 @@
 </head>
 <body onload="init()">
     <span class="clock">10:11</span>
-    <section class="is-working">
-      <h1>הקו כרגע עובד</h1>
-      <h3 class="work-dur">
-        תחילת עבודה:
-        <span class="dur">
-          7:03
-        </span>
-        <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
-      </h3>
-
-      <h2 class="buttons-title"></h2>
-      <div class="buttons-container">
-        <button type="button" name="button">lalala</button>
-      </div>
+    <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
+    <section class="start">
+      <button type="button" onclick="startAdjusting()">התחלת כיוונון</button>
     </section>
-    <section class="is-stopped hidden">
-      <h1>הקו כרגע מושבת</h1>
-      <h2 class="stop-reason">
-        סיבת ההשבתה:
-        <span class="reason">
-          הפסקה
-        </span>
-      </h2>
+    <section class="adjusting">
+      <h1>בכיוונון</h1>
+      <button type="button" onclick="startWorking()">סיום כיוונון ותחילת עבודה</button>
+    </section>
+    <section class="working">
+      <h1>בעבודה</h1>
+      <button type="button" onclick="stopWorking()">סיום עבודה</button>
+      <button type="button" onclick="startAdjusting()">כיוונון</button>
+    </section>
+    <section class="stopped">
+      <h1>מושבת</h1>
       <h2 class="stop-dur">
-        הקו מושבת כבר:
+        זמן השבתה:
         <span class="dur">
           00:26
         </span>
+        <button type="button" onclick="goBackToWork()">חזרה לעבודה</button>
+        <div class="stop-reasons">
+          <h1>סיבת ההשבתה:</h1>
+          <div class="reasons-container">
+            <button type="button">הפסקה</button>
+          </div>
+        </div>
       </h2>
-
-      <button type="button" class="stop-button" onclick="goBackToWork()">
-        <span>
-          חזרה לעבודה
-        </span>
-        <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
-      </button>
     </section>
 </body>
 </html>
