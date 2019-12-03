@@ -23,24 +23,26 @@
     </section>
     <section class="working">
       <h1>בעבודה</h1>
-      <button type="button" onclick="stopWorking()">סיום עבודה</button>
-      <button type="button" onclick="startAdjusting()">כיוונון</button>
+      <div class="buttons-container">
+        <button type="button" onclick="stopWorking()">סיום עבודה</button>
+        <button type="button" onclick="startAdjusting()">כיוונון</button>
+      </div>
     </section>
     <section class="stopped">
       <h1>מושבת</h1>
       <h2 class="stop-dur">
         זמן השבתה:
         <span class="dur">
-          00:26
+          00:00
         </span>
-        <button type="button" onclick="goBackToWork()">חזרה לעבודה</button>
-        <div class="stop-reasons">
-          <h1>סיבת ההשבתה:</h1>
-          <div class="reasons-container">
-            <button type="button">הפסקה</button>
-          </div>
-        </div>
       </h2>
+      <button type="button" onclick="goBackToWork()">חזרה לעבודה</button>
+      <div class="stop-reasons">
+        <h2>סיבת ההשבתה:</h2>
+        <div class="reasons-container">
+          <button type="button">הפסקה</button>
+        </div>
+      </div>
     </section>
 </body>
 </html>

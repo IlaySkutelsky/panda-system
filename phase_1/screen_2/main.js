@@ -13,33 +13,60 @@ function init(){
 function getAndUpdateData() {
   getAndShowTime();
   // getLineState();
-  // updateDuration();
+  updateDownDuration();
   setTimeout(getAndUpdateData, 10000);
 }
 
 function startAdjusting() {
   state.stage = 2
+  showCurrentStage()
   console.log("starting to adjust");
 }
 
 function startWorking() {
   state.stage = 3
+  showCurrentStage()
   console.log("starting to work");
 }
 
 function stopWorking() {
+  state.stoppedSinceTimestamp = Date.now()
   state.stage = 4
+  showCurrentStage()
   console.log("stopped working");
 }
 
 
 function goBackToWork() {
   state.stage = 3
+  showCurrentStage()
   console.log("back to working");
 }
 
 function reportReason(id) {
   console.log("reporting reason: " + id);
+}
+
+function showCurrentStage() {
+  $("section").addClass("hidden")
+  let stageClassesMap = {
+    1: "start",
+    2: "adjusting",
+    3: "working",
+    4: "stopped"
+  }
+  let stageClass = stageClassesMap[state.stage]
+  $(`section.${stageClass}`).removeClass("hidden")
+}
+
+function updateDownDuration() {
+  if (!state.stoppedSinceTimestamp) return
+  let seconds = (Date.now() - state.stoppedSinceTimestamp) / 1000;
+  let hours = Math.floor(seconds / 3600);
+  seconds %= 3600;
+  let minutes = Math.floor(seconds / 60);
+  let durationString = keepTwoDigits(hours)+":"+keepTwoDigits(minutes)
+  $(".stopped .stop-dur .dur").text(durationString)
 }
 
 function getAndRenderReasons() {
