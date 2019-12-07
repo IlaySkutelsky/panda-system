@@ -24,7 +24,7 @@ function submitLoss() {
   let lossAmount = $("input.loss-amount").val();
 
   $.ajax({
-     url: `http://www.chocolatepanda.co.il/kav/add_waste.php?amount=${lossAmount}&type=${lossType}`
+     url: `https://www.chocolatepanda.co.il/kav/add_waste.php?amount=${lossAmount}&type=${lossType}`
    })
   .done((result) => {
     console.log(" >>> submitLoss success!");

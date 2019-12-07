@@ -15,7 +15,7 @@ function getAndShowProdRate() {
   $(".prod-rate .amount").text(" ")
   $(".prod-rate .lds-ellipsis").removeClass("hidden")
   $.ajax({
-     url: "http://www.chocolatepanda.co.il/kav/current_rate.php",
+     url: "https://www.chocolatepanda.co.il/kav/current_rate.php",
    })
   .done((result) => {
     console.log(" >>> getAndShowProdRate succes! result: " + result);
@@ -32,7 +32,7 @@ function getAndShowShiftSum() {
   $(".shift-sum .amount").text(" ")
   $(".shift-sum .lds-ellipsis").removeClass("hidden")
   $.ajax({
-     url: "http://www.chocolatepanda.co.il/kav/shift_output.php",
+     url: "https://www.chocolatepanda.co.il/kav/shift_output.php",
    })
   .done((result) => {
     console.log(" >>> getAndShowShiftSum succes! result: " + result);
@@ -49,7 +49,7 @@ function getAndShowInstructions() {
   $(".instructions").text(" ")
   $(".instructions-container .lds-ellipsis").removeClass("hidden")
   $.ajax({
-     url: "http://www.chocolatepanda.co.il/kav/shift_output.php",
+     url: "https://www.chocolatepanda.co.il/kav/shift_output.php",
    })
   .done((result) => {
     console.log(" >>> getAndShowInstructions succes! result: " + result);

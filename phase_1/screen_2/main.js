@@ -82,7 +82,7 @@ function updateDownDuration() {
 function getAndRenderReasons() {
   // $(".prod-rate .lds-ellipsis").addClass("hidden")
   $.ajax({
-     url: "http://www.chocolatepanda.co.il/kav/stop_reasons.php",
+     url: "https://www.chocolatepanda.co.il/kav/stop_reasons.php",
    })
   .done((result) => {
     let reasonsObj =  JSON.parse(result);
