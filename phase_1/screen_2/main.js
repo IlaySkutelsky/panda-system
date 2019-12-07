@@ -2,7 +2,7 @@ let state = {
   stage: 1,
   workingSinceTimestamp: null,
   stoppedSinceTimestamp: null,
-  stopReasonsJSON: null
+  currentStopReason: null
 }
 
 function init(){
@@ -45,6 +45,16 @@ function goBackToWork() {
 
 function reportReason(id) {
   console.log("reporting reason: " + id);
+  $.ajax({
+     url: "https://www.chocolatepanda.co.il/kav/stop_line.php?reason_id=$reason",
+   })
+  .done((result) => {
+    console.log(" >>> reportReason success: " + JSON.parse(result));
+  })
+  .fail((error) => {
+    console.log(" >>> reportReason error!: " + JSON.parse(error));
+  })
+
 }
 
 function showCurrentStage() {
@@ -75,11 +85,14 @@ function getAndRenderReasons() {
      url: "http://www.chocolatepanda.co.il/kav/stop_reasons.php",
    })
   .done((result) => {
-    console.log(" >>> getAndShowReasons succes! result: ");
-    console.log(JSON.parse(result));
+    let reasonsObj =  JSON.parse(result);
+    let buttonsHtml = ''
+    $.each(reasonsObj, (index, value) => {
+      buttonsHtml += `<button onclick="reportReason(${index})">${value}</button>`
+    })
+    $(".reasons-container").html(buttonsHtml)
   })
-  .fail((error) => {   $(".clock").text()
-
+  .fail((error) => {
     console.log(" >>> getAndShowReasons error!: " + JSON.parse(error));
   })
 

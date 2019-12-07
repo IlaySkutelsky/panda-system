@@ -55,6 +55,24 @@ section.stopped {
   justify-content: flex-start;
 }
 
+.stopped h1 {
+  font-size: 4em;
+  margin: 0px;
+  margin-top: 0px;
+  margin-top: 0.8em;
+}
+
+.reasons-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  font-size: 0.4em;
+  justify-content: space-between;
+}
+
+.stop-reasons button {
+  flex-grow: 1;
+}
 
 
 
