@@ -27,7 +27,7 @@ function getLineState() {
     };
   })
   .fail((error) => {
-    console.log(" >>> getLineState error!: " + error);
+    console.log(" >>> getLineState error!: " + JSON.stringify(error));
   })
 }
 
