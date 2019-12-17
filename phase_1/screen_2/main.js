@@ -18,7 +18,7 @@ function getAndUpdateData() {
 
 function getLineState() {
   $.ajax({
-     url: 'http://www.chocolatepanda.co.il/kav/get_status.php',
+     url: 'https://www.chocolatepanda.co.il/kav/get_status.php',
    })
   .done((result) => {
     result = +JSON.parse(result)
@@ -46,7 +46,7 @@ function setCurrentStage(id, fromServer) {
 
 function reportCurrStatus(id, reasonId) {
   console.log("reporting status id: " + id + " and reasonId: " + reasonId);
-  let url = 'http://www.chocolatepanda.co.il/kav/set_status.php?status=' + id
+  let url = 'https://www.chocolatepanda.co.il/kav/set_status.php?status=' + id
   if (reasonId) {
     url += '&stop_reason=' + reasonId
   }
