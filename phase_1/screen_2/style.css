@@ -11,6 +11,10 @@ h1 {
   font-size: 6em;
 }
 
+h2 {
+    font-size: 1.8em;
+}
+
 br {
   display: none;
 }
@@ -23,6 +27,7 @@ body {
   text-align: center;
   direction: rtl;
   font-family: 'Alef', sans-serif;
+  padding: 0;
 }
 
 .clock {

@@ -1,8 +1,7 @@
 let state = {
   stage: 1,
-  workingSinceTimestamp: null,
   stoppedSinceTimestamp: null,
-  currentStopReason: null
+  stopReasonId: null
 }
 
 function init(){
@@ -12,49 +11,61 @@ function init(){
 
 function getAndUpdateData() {
   getAndShowTime();
-  // getLineState();
+  getLineState();
   updateDownDuration();
   setTimeout(getAndUpdateData, 10000);
 }
 
-function startAdjusting() {
-  state.stage = 2
-  showCurrentStage()
-  console.log("starting to adjust");
-}
-
-function startWorking() {
-  state.stage = 3
-  showCurrentStage()
-  console.log("starting to work");
-}
-
-function stopWorking() {
-  state.stoppedSinceTimestamp = Date.now()
-  state.stage = 4
-  showCurrentStage()
-  console.log("stopped working");
-}
-
-
-function goBackToWork() {
-  state.stage = 3
-  showCurrentStage()
-  console.log("back to working");
-}
-
-function reportReason(id) {
-  console.log("reporting reason: " + id);
+function getLineState() {
   $.ajax({
-     url: "https://www.chocolatepanda.co.il/kav/stop_line.php?reason_id=$reason",
+     url: 'http://www.chocolatepanda.co.il/kav/get_status.php',
    })
   .done((result) => {
-    console.log(" >>> reportReason success: " + JSON.parse(result));
+    result = +JSON.parse(result)
+    if (result != state.stage) {
+      setCurrentStage(result, true);
+    };
+  })
+  .fail((error) => {
+    console.log(" >>> getLineState error!: " + JSON.parse(error));
+  })
+}
+
+function setCurrentStage(id, fromServer) {
+  if (id === 4) {
+    state.stoppedSinceTimestamp = Date.now()
+  }
+  state.stage = id
+  if (!fromServer) {
+    reportCurrStatus(id, state.stopReasonId)
+  }
+  showCurrentStage()
+  console.log("current stage: " + id);
+
+}
+
+function reportCurrStatus(id, reasonId) {
+  console.log("reporting status id: " + id + " and reasonId: " + reasonId);
+  let url = 'http://www.chocolatepanda.co.il/kav/set_status.php?status=' + id
+  if (reasonId) {
+    url += '&stop_reason=' + reasonId
+  }
+  state.currentStopReason = id;
+  console.log("reporting to url: " + url);
+  $.ajax({
+     url: url,
+   })
+  .done((result) => {
+    console.log(" >>> reportReason success: " + result);
   })
   .fail((error) => {
     console.log(" >>> reportReason error!: " + JSON.parse(error));
   })
+}
 
+function setReason(id) {
+  state.stopReasonId = id
+  console.log("setting stop reason id: " + id);
 }
 
 function showCurrentStage() {
@@ -66,6 +77,7 @@ function showCurrentStage() {
     4: "stopped"
   }
   let stageClass = stageClassesMap[state.stage]
+  debugger;
   $(`section.${stageClass}`).removeClass("hidden")
 }
 
@@ -88,24 +100,14 @@ function getAndRenderReasons() {
     let reasonsObj =  JSON.parse(result);
     let buttonsHtml = ''
     $.each(reasonsObj, (index, value) => {
-      buttonsHtml += `<button onclick="reportReason(${index})">${value}</button>`
+      buttonsHtml += `<button onclick="setReason(${index})">${value}</button>`
     })
     $(".reasons-container").html(buttonsHtml)
   })
   .fail((error) => {
     console.log(" >>> getAndShowReasons error!: " + JSON.parse(error));
   })
-
-  let json = `[{"title":"break","id":0},{"title":"technical","id":1},{"title":"rnd of shift","id":2},{"title":"break","id":3},{"title":"technical","id":4},{"title":"rnd of shift","id":4},{"title":"break","id":6},{"title":"technical","id":7},{"title":"rnd of shift","id":8},{"title":"break","id":9},{"title":"technical","id":10},{"title":"rnd of shift","id":11}]`
-  if (state.stopReasonsJSON && state.stopReasonsJSON != json) {
-    state.stopReasonsJSON = json
-    let reasons = JSON.parse(json)
-    // jquery render reasons
-  }
-
 }
-
-
 
 function getAndShowTime() {
   let now = new Date();

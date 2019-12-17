@@ -14,18 +14,18 @@
 <body onload="init()">
     <span class="clock">10:11</span>
     <div class="lds-ellipsis hidden"><div></div><div></div><div></div><div></div></div>
-    <section class="start hidden">
-      <button type="button" onclick="startAdjusting()">התחלת כיוונון</button>
+    <section class="start">
+      <button type="button" onclick="setCurrentStage(2)">התחלת כיוונון</button>
     </section>
-    <section class="adjusting hidden">
+    <section class="adjusting">
       <h1>בכיוונון</h1>
-      <button type="button" onclick="startWorking()">סיום כיוונון ותחילת עבודה</button>
+      <button type="button" onclick="setCurrentStage(3)">סיום כיוונון ותחילת עבודה</button>
     </section>
-    <section class="working hidden">
+    <section class="working">
       <h1>בעבודה</h1>
       <div class="buttons-container">
-        <button type="button" onclick="stopWorking()">סיום עבודה</button>
-        <button type="button" onclick="startAdjusting()">כיוונון</button>
+        <button type="button" onclick="setCurrentStage(4)">סיום עבודה</button>
+        <button type="button" onclick="setCurrentStage(2)">כיוונון</button>
       </div>
     </section>
     <section class="stopped">
@@ -36,7 +36,7 @@
           00:00
         </span>
       </h2>
-      <button type="button" onclick="goBackToWork()">חזרה לעבודה</button>
+      <button type="button" onclick="setCurrentStage(3)">חזרה לעבודה</button>
       <div class="stop-reasons">
         <h2>סיבת ההשבתה:</h2>
         <div class="reasons-container">
