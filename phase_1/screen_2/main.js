@@ -33,8 +33,17 @@ function getLineState() {
 
 function setCurrentStage(id, fromServer) {
   if (id === 4) {
+    $('.warning').addClass("hidden")
     state.stoppedSinceTimestamp = Date.now()
+  } else if (state.stoppedSinceTimestamp) {
+    state.stoppedSinceTimestamp = null;
   }
+
+  if (state.stage === 4 && id === 3 && !state.stopReasonId){ //Dont go back to work without giving a reason for the stop
+    $('.warning').removeClass("hidden")
+    return
+  }
+
   state.stage = id
   if (!fromServer) {
     reportCurrStatus(id, state.stopReasonId)
@@ -65,6 +74,9 @@ function reportCurrStatus(id, reasonId) {
 
 function setReason(id) {
   state.stopReasonId = id
+  $(`button.reason`).removeClass("picked not-picked")
+  $(`button.reason:not([reason-id="${id}"])`).addClass("not-picked")
+  $(`button.reason[reason-id="${id}"]`).addClass("picked")
   console.log("setting stop reason id: " + id);
 }
 
@@ -77,7 +89,6 @@ function showCurrentStage() {
     4: "stopped"
   }
   let stageClass = stageClassesMap[state.stage]
-  debugger;
   $(`section.${stageClass}`).removeClass("hidden")
 }
 
@@ -100,7 +111,7 @@ function getAndRenderReasons() {
     let reasonsObj =  JSON.parse(result);
     let buttonsHtml = ''
     $.each(reasonsObj, (index, value) => {
-      buttonsHtml += `<button onclick="setReason(${index})">${value}</button>`
+      buttonsHtml += `<button class="reason" reason-id=${index} onclick="setReason(${index})">${value}</button>`
     })
     $(".reasons-container").html(buttonsHtml)
   })

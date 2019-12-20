@@ -17,18 +17,18 @@
     <section class="start">
       <button type="button" onclick="setCurrentStage(2)">התחלת כיוונון</button>
     </section>
-    <section class="adjusting">
+    <section class="adjusting hidden">
       <h1>בכיוונון</h1>
       <button type="button" onclick="setCurrentStage(3)">סיום כיוונון ותחילת עבודה</button>
     </section>
-    <section class="working">
+    <section class="working hidden">
       <h1>בעבודה</h1>
       <div class="buttons-container">
         <button type="button" onclick="setCurrentStage(4)">סיום עבודה</button>
         <button type="button" onclick="setCurrentStage(2)">כיוונון</button>
       </div>
     </section>
-    <section class="stopped">
+    <section class="stopped hidden">
       <h1>מושבת</h1>
       <h2 class="stop-dur">
         זמן השבתה:
@@ -37,6 +37,7 @@
         </span>
       </h2>
       <button type="button" onclick="setCurrentStage(3)">חזרה לעבודה</button>
+      <span class="warning hidden">יש לבחור סיבת השבתה לפני חזרה לעבודה</span>
       <div class="stop-reasons">
         <h2>סיבת ההשבתה:</h2>
         <div class="reasons-container">

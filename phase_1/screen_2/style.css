@@ -25,7 +25,6 @@ br {
 
 body {
   text-align: center;
-  direction: rtl;
   font-family: 'Alef', sans-serif;
   padding: 0;
 }
@@ -79,6 +78,23 @@ section.stopped {
   flex-grow: 1;
 }
 
+button.reason {
+  opacity: 1;
+  transition: 250ms;
+}
+
+button.reason.picked {
+  background-color: #982c61;
+}
+
+button.reason.not-picked {
+  opacity: 0.6;
+}
+.warning {
+  line-height: 0px;
+  color: red;
+  font-weight: bold;
+}
 
 
 
