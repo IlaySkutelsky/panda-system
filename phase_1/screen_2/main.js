@@ -35,11 +35,7 @@ function setCurrentStage(id, fromServer) {
   if (id === 4) {
     $('.warning').addClass("hidden")
     state.stoppedSinceTimestamp = Date.now()
-  } else if (state.stoppedSinceTimestamp) {
-    state.stoppedSinceTimestamp = null;
-  }
-
-  if (state.stage === 4 && id === 3 && !state.stopReasonId){ //Dont go back to work without giving a reason for the stop
+  } else if (state.stage === 4 && id === 3 && !state.stopReasonId){ //Dont go back to work without giving a reason for the stop
     $('.warning').removeClass("hidden")
     return
   }
@@ -70,6 +66,9 @@ function reportCurrStatus(id, reasonId) {
   .fail((error) => {
     console.log(" >>> reportReason error!: " + JSON.parse(error));
   })
+
+  state.stoppedSinceTimestamp = null;
+  state.stopReasonId = null;
 }
 
 function setReason(id) {
