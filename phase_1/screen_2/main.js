@@ -37,7 +37,6 @@ function setCurrentStage(id, fromServer) {
     state.stopReasonId = null;
     $(`button.reason`).removeClass("picked not-picked")
   } else if (id === 4) {
-    $('.warning').addClass("hidden")
     $("button.back-to-work-btn").prop("disabled", true)
     state.stoppedSinceTimestamp = Date.now()
   }
