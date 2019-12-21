@@ -11,8 +11,8 @@ function init(){
 
 function getAndUpdateData() {
   getAndShowTime();
-  getLineState();
   updateDownDuration();
+  getLineState();
   setTimeout(getAndUpdateData, 10000);
 }
 
@@ -32,12 +32,14 @@ function getLineState() {
 }
 
 function setCurrentStage(id, fromServer) {
-  if (id === 4) {
+  if (state.stage === 4) {
+    state.stoppedSinceTimestamp = null;
+    state.stopReasonId = null;
+    $(`button.reason`).removeClass("picked not-picked")
+  } else if (id === 4) {
     $('.warning').addClass("hidden")
+    $("button.back-to-work-btn").prop("disabled", true)
     state.stoppedSinceTimestamp = Date.now()
-  } else if (state.stage === 4 && id === 3 && !state.stopReasonId){ //Dont go back to work without giving a reason for the stop
-    $('.warning').removeClass("hidden")
-    return
   }
 
   state.stage = id
@@ -46,7 +48,6 @@ function setCurrentStage(id, fromServer) {
   }
   showCurrentStage()
   console.log("current stage: " + id);
-
 }
 
 function reportCurrStatus(id, reasonId) {
@@ -61,14 +62,12 @@ function reportCurrStatus(id, reasonId) {
      url: url,
    })
   .done((result) => {
-    console.log(" >>> reportReason success: " + result);
+    console.log(" >>> reportCurrStatus success: " + result);
   })
   .fail((error) => {
-    console.log(" >>> reportReason error!: " + JSON.parse(error));
+    console.log(" >>> reportCurrStatus error!: " + JSON.parse(error));
   })
 
-  state.stoppedSinceTimestamp = null;
-  state.stopReasonId = null;
 }
 
 function setReason(id) {
@@ -76,6 +75,7 @@ function setReason(id) {
   $(`button.reason`).removeClass("picked not-picked")
   $(`button.reason:not([reason-id="${id}"])`).addClass("not-picked")
   $(`button.reason[reason-id="${id}"]`).addClass("picked")
+  $("button.back-to-work-btn").prop("disabled", false)
   console.log("setting stop reason id: " + id);
 }
 
@@ -102,7 +102,6 @@ function updateDownDuration() {
 }
 
 function getAndRenderReasons() {
-  // $(".prod-rate .lds-ellipsis").addClass("hidden")
   $.ajax({
      url: "https://www.chocolatepanda.co.il/kav/stop_reasons.php",
    })
@@ -115,7 +114,7 @@ function getAndRenderReasons() {
     $(".reasons-container").html(buttonsHtml)
   })
   .fail((error) => {
-    console.log(" >>> getAndShowReasons error!: " + JSON.parse(error));
+    console.log(" >>> getAndShowReasons error!: " + JSON.stringify(error));
   })
 }
 
