@@ -1,4 +1,3 @@
-
 function init(){
   getAndUpdateData();
 }
@@ -18,7 +17,7 @@ function getAndShowProdRate() {
      url: "https://www.chocolatepanda.co.il/kav/current_rate.php",
    })
   .done((result) => {
-    console.log(" >>> getAndShowProdRate succes! result: " + result);
+    // console.log(" >>> getAndShowProdRate success! result: " + result);
     let amount = result;
     $(".prod-rate .lds-ellipsis").addClass("hidden")
     $(".prod-rate .amount").text(amount)
@@ -35,7 +34,7 @@ function getAndShowShiftSum() {
      url: "https://www.chocolatepanda.co.il/kav/shift_output.php",
    })
   .done((result) => {
-    console.log(" >>> getAndShowShiftSum succes! result: " + result);
+    // console.log(" >>> getAndShowShiftSum success! result: " + result);
     let amount = result;
     $(".shift-sum .lds-ellipsis").addClass("hidden")
     $(".shift-sum .amount").text(amount)
@@ -52,7 +51,7 @@ function getAndShowInstructions() {
      url: "https://www.chocolatepanda.co.il/kav/shift_output.php",
    })
   .done((result) => {
-    console.log(" >>> getAndShowInstructions succes! result: " + result);
+    // console.log(" >>> getAndShowInstructions success! result: " + result);
     let instructions = result;
     $(".instructions-container .lds-ellipsis").addClass("hidden")
     $(".instructions").text(instructions)
@@ -61,11 +60,6 @@ function getAndShowInstructions() {
   .fail((error) => {
     console.log(" >>> getAndShowInstructions error!: " + JSON.stringify(error));
   })
-
-  // let instructions = `
-  //   לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אלית גולר. מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק ליץ, לפרומי בלוף קינץ תתיח לרעח. `;
-  // $(".instructions").text(instructions)
-  // $(".instructions").shrinkText();
 }
 
 function getAndShowTime() {

@@ -66,7 +66,6 @@ function reportCurrStatus(id, reasonId) {
   .fail((error) => {
     console.log(" >>> reportCurrStatus error!: " + JSON.parse(error));
   })
-
 }
 
 function setReason(id) {
